@@ -9,7 +9,7 @@ slurm_package:
   pkg.installed:
   - name: {{ slurm.pkgSlurmNode }}
   - pkgs:
-    - {{ slurm.pkgSlurmNode }}
+    - {{ slurm.pkgSlurmNode }}: {{ slurm.slurm_version }}
 
 slurm_service:
   file.directory:

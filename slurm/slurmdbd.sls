@@ -91,8 +91,8 @@ slurm_slurmdbd:
   pkg.installed:
     - name: {{ slurm.pkgSlurmDBD }}
     - pkgs:
-      - {{ slurm.pkgSlurmSQL }}
-      - {{ slurm.pkgSlurmDBD }}
+      - {{ slurm.pkgSlurmSQL }}: {{ slurm.slurm_version }}
+      - {{ slurm.pkgSlurmDBD }}: {{ slurm.slurm_version }}
   service:
     - running
     - enable: true

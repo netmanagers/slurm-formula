@@ -26,11 +26,11 @@ slurm_client:
   pkg.installed:
     - name: {{ slurm.pkgSlurm }}
     - pkgs:
-      - {{ slurm.pkgSlurm }}
+      - {{ slurm.pkgSlurm }}: {{ slurm.slurm_version }}
       {%  if salt['pillar.get']('slurm:AuthType') == 'munge' %}
-      - {{ slurm.pkgSlurmMunge }}
+      - {{ slurm.pkgSlurmMunge }}: {{ slurm.slurm_version }}
       {% endif %}
-      - {{ slurm.pkgSlurmPlugins }}
+      - {{ slurm.pkgSlurmPlugins }}: {{ slurm.slurm_version }}
     - refresh: True
 
 slurm_config_dir:

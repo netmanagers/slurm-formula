@@ -5,6 +5,7 @@
 slurm_munge:
   pkg.installed:
     - name: {{ slurm.pkgMunge }}
+    - version: {{ slurm.munge_version }}
   service:
     - running
     - name: munge

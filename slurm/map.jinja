@@ -2,6 +2,7 @@
 
   {
   'RedHat': {
+        'control_machine': 'localhost',
         'use_cgroup': False,
         'server': 'slurmctld',
         'server_bin': '/usr/sbin/slurmctld',
@@ -19,6 +20,8 @@
 	    'slurmd': 'slurmd',
 	    'slurmctld': 'slurmctld',
     	'slurmdbd': 'slurmdbd',
+        'slurm_version': '20.11.6',
+        'munge_version': '0.5.12',
         'pkgSlurm':'slurm',
         'pkgSlurmMunge':'slurm-munge',
         'pkgSlurmPlugins':'slurm-plugins',
@@ -52,6 +55,8 @@
 	    'slurmd': 'slurmd',
 	    'slurmctld': 'slurmctld',
 	    'slurmdbd': 'slurmdbd',
+        'slurm_version': '18.08.5.2',
+        'munge_version': '0.5.12',
         'pkgSlurm':'slurm-client',
 	    'pkgSlurmNode':'slurmd',
 	    'pkgSlurmServer': 'slurmctld',
