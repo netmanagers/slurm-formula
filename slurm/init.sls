@@ -13,7 +13,7 @@ slurm_user:
 {% if slurmConf.userGid is defined %}
     - gid: {{ slurmConf.UserGid }}
 {% else %}
-    - gid_from_name: True
+    - usergroup: True
 {% endif %}
     - require_in:
         - pkg: slurm_client

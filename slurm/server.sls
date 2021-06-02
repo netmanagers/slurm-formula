@@ -11,7 +11,7 @@ server_log_file:
     - user: slurm
     - group: slurm
     - dir_user: slurm
-    - file_mode: 755
+    - mode: 755
     - dir_mode: 777
     - makedirs: True
     - require:
@@ -54,7 +54,7 @@ slurm_state_location:
     - user: slurm
     - group: slurm
     - dir_mode: 755
-    - file_mode: 644
+    - mode: 644
 
 
 
