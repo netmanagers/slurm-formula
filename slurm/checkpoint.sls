@@ -3,7 +3,7 @@ include:
   - slurm
 
 {% if salt['pillar.get']('slurm:CheckpointType') == 'blcr' -%}
-slrum_checkpoint_pkgs:
+slurm_checkpoint_pkgs:
   pkg.installed:
     - pkgs:
       - slurm-blcr
