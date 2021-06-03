@@ -103,7 +103,7 @@ slurm_slurmdbd:
     - require:
       - pkg: {{ slurm.pkgSlurmDBD }}
       {%  if salt['pillar.get']('slurm:AuthType') == 'munge' %}
-      - service: munge
+      - service: slurm_munge
       {%endif %}
       - file: /etc/slurm/slurmdbd.conf
       - mysql_user: {{ salt['pillar.get']('slurm:AccountingStorageUser','slurmuser') }}

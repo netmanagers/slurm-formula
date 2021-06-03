@@ -40,7 +40,7 @@ slurm_server:
     - reload: False
     - require:
       - file: Bug_rpm_no_create_default_environment
-      - service: munge
+      - service: slurm_munge
   cmd.run:
     - name: {{ slurm.scontrol }} reconfigure
     - require:

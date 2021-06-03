@@ -13,7 +13,7 @@ slurm_package:
     - require:
       - pkg: {{ slurm.pkgSlurm }}
       {% if salt['pillar.get']('slurm:AuthType') == 'munge' %}
-      - service: munge
+      - service: slurm_munge
       {%endif %}
 
 slurm_service:
