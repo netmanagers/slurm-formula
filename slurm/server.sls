@@ -7,12 +7,12 @@ include:
 
 slurm_server_package:
   pkg.installed:
-  - name: {{ slurm.pkgSlurmServer }}
-  - pkgs:
-    - {{ slurm.pkgSlurmServer }}: {{ slurm.slurm_version }}
+    - name: {{ slurm.pkgSlurmServer }}
+    - pkgs:
+      - {{ slurm.pkgSlurmServer }}: {{ slurm.slurm_version }}
     - require:
     {% if salt['pillar.get']('slurm:AuthType') == 'munge' %}
-      - pkg: {{ slurm.pkgMunge }}
+      - service: slurm_munge
     {% endif %}
 
 server_log_file:

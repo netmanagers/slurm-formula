@@ -10,11 +10,11 @@ slurm_package:
   - name: {{ slurm.pkgSlurmNode }}
   - pkgs:
     - {{ slurm.pkgSlurmNode }}: {{ slurm.slurm_version }}
-    - require:
-      - pkg: {{ slurm.pkgSlurm }}
-      {% if salt['pillar.get']('slurm:AuthType') == 'munge' %}
-      - service: slurm_munge
-      {%endif %}
+  - require:
+    - pkg: {{ slurm.pkgSlurm }}
+    {% if salt['pillar.get']('slurm:AuthType') == 'munge' %}
+    - service: slurm_munge
+    {%endif %}
 
 slurm_service:
   file.directory:
