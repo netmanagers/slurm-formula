@@ -17,26 +17,15 @@ slurm_munge:
       - file: /etc/munge/munge.key
 
 {%  if slurmConf.MungeKey64 is defined -%}
-slurm_munge_key64:
+slurm_munge_key:
   file.managed:
-    - name: /etc/munge/munge.key64
+    - name: /etc/munge/munge.key
     - user: munge
     - group: munge
     - mode: '0400'
     - contents_pillar: slurm:MungeKey64
     - require:
         - pkg: slurm_munge
-  cmd.wait:
-    - name: base64 -d /etc/munge/munge.key64 >/etc/munge/munge.key
-    - watch:
-        - file: /etc/munge/munge.key64
-slurm_munge_key:
-  file.managed:
-    - name: /etc/munge/munge.key
-    - requre:
-        - cmd: slurm_munge_key
-    - replace: false
-    - mode: '0400'
 {%- else %}
 slurm_munge_key:
   file.managed:
