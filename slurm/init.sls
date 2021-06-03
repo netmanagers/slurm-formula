@@ -89,7 +89,7 @@ slurm_cgroups_config:
     - template: jinja
     - source: salt://slurm/files/cgroup.conf
     - context:
-        slurm: {{ slurm }}
+        slurm: {{ slurm |default({}) }}
 
 slurmd_config:
   file.managed:

@@ -1,38 +1,4 @@
-ControlMachine={{ slurm.control_machine}}
-AuthType=auth/munge
-CacheGroups=0
-CryptoType=crypto/munge
-JobCheckpointDir={{ slurm.slurmchekpointdir }}
-MpiDefault=none
-ProctrackType=proctrack/pgid
-ReturnToService=2
-SlurmctldPidFile={{ slurm.rundir }}/slurmctld.pid
-SlurmctldPort=6817
-SlurmdPidFile={{ slurm.rundir }}/slurmd.pid
-SlurmdPort=6818
-SlurmdSpoolDir={{ slurm.slurmddir }}
-SlurmUser=slurm
-StateSaveLocation={{ slurm.slurmctlddir }}
-SwitchType=switch/none
-TaskPlugin=task/affinity
-InactiveLimit=0
-KillWait=30
-MinJobAge=300
-SlurmctldTimeout=300
-SlurmdTimeout=300
-Waittime=0
-FastSchedule=1
-SchedulerType=sched/backfill
-SchedulerPort=7321
-SelectType=select/linear
-AccountingStorageType=accounting_storage/none
-ClusterName=cluster
-JobCompType=jobcomp/none
-JobAcctGatherFrequency=30
-JobAcctGatherType=jobacct_gather/none
-SlurmctldDebug=3
-SlurmctldLogFile={{ slurm.logdir }}/slurmctld.log
-SlurmdDebug=3
-SlurmdLogFile={{ slurm.logdir }}/slurmd.log
-NodeName={{ slurm.NodeName }}
-PartitionName={{ slurm. PartitionName }}
+{#- Quick fix to get it running first #}
+{%- for k, v in slurm.slurm_config.items() %}
+{{ k }}={{ v }}
+{%- endfor %}
