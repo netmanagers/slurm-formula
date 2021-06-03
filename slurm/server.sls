@@ -10,6 +10,10 @@ slurm_server_package:
   - name: {{ slurm.pkgSlurmServer }}
   - pkgs:
     - {{ slurm.pkgSlurmServer }}: {{ slurm.slurm_version }}
+    - require:
+    {% if salt['pillar.get']('slurm:AuthType') == 'munge' %}
+      - pkg: {{ slurm.pkgMunge }}
+    {% endif %}
 
 server_log_file:
   file.managed:
@@ -21,9 +25,7 @@ server_log_file:
     - dir_mode: 777
     - makedirs: True
     - require:
-    {%  if salt['pillar.get']('slurm:AuthType') == 'munge' %}
-      - pkg: {{ slurm.pkgMunge }}
-    {% endif %}
+      - pkg: slurm_server_package
       - user: slurm
 
 Bug_rpm_no_create_default_environment:
@@ -38,13 +40,14 @@ slurm_server:
     - reload: False
     - require:
       - file: Bug_rpm_no_create_default_environment
+      - service: munge
   cmd.run:
     - name: {{ slurm.scontrol }} reconfigure
     - require:
-      - file: {{slurm.etcdir}}/{{ slurm.config }}
+      - file: {{ slurm.etcdir }}/{{ slurm.config }}
       - pkg: slurm_server_package
     - onchanges:
-      - file: {{slurm.etcdir}}/{{ slurm.config }}
+      - file: {{ slurm.etcdir }}/{{ slurm.config }}
 
 slurm_config_logrotate_slurmctl:
   file.managed:
@@ -67,9 +70,3 @@ slurm_state_location:
     - mode: 644
     - require:
       - pkg: slurm_server_package
-
-
-
-
-
-

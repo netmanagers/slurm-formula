@@ -10,6 +10,11 @@ slurm_package:
   - name: {{ slurm.pkgSlurmNode }}
   - pkgs:
     - {{ slurm.pkgSlurmNode }}: {{ slurm.slurm_version }}
+    - require:
+      - pkg: {{ slurm.pkgSlurm }}
+      {% if salt['pillar.get']('slurm:AuthType') == 'munge' %}
+      - service: munge
+      {%endif %}
 
 slurm_service:
   file.directory:
@@ -21,10 +26,7 @@ slurm_service:
     - name: {{ slurm.slurmd }}
     - reload: False
     - require:
-      - pkg: {{  slurm.pkgSlurm }}
-      - pkg: {{  slurm.pkgSlurmNode }}
-      {%  if salt['pillar.get']('slurm:AuthType') == 'munge' %}
-      - service: munge
+      - pkg: slurm_package
       {%endif %}
 
 slurm_config_logrotate:
@@ -35,8 +37,5 @@ slurm_config_logrotate:
     - mode: '644'
     - template: jinja
     - source: salt://slurm/files/slurmd-logrotate.log
-
-
-
-
-
+    - require:
+      - file: slurm_service
