@@ -1,4 +1,4 @@
 {#- Quick fix to get it running first #}
-{%- for k, v in slurm.slurm_config.items() %}
+{%- for k, v in slurm.config.items() %}
 {{ k }}={{ v }}
 {%- endfor %}
