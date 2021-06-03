@@ -27,7 +27,6 @@ slurm_service:
     - reload: False
     - require:
       - pkg: slurm_package
-      {%endif %}
 
 slurm_config_logrotate:
   file.managed:
